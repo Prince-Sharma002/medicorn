@@ -1,0 +1,134 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand-green: var(--brand-green);
+  --color-brand-lime: var(--brand-lime);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-orange: var(--brand-orange);
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.03 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 260);
+  --primary: oklch(0.68 0.19 45);          /* orange #FFA02E-ish */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.01 90);
+  --secondary-foreground: oklch(0.2 0.03 260);
+  --muted: oklch(0.97 0.005 90);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: oklch(0.55 0.16 145);          /* green #468432 */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.24 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.92 0.01 90);
+  --input: oklch(0.92 0.01 90);
+  --ring: oklch(0.68 0.19 45);
+
+  /* Brand hex tokens */
+  --brand-green: #468432;
+  --brand-lime: #9AD872;
+  --brand-yellow: #FFEF91;
+  --brand-orange: #FFA02E;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.025em; font-weight: 700; }
+  ::selection { background: color-mix(in oklab, var(--brand-orange) 30%, transparent); }
+}
+
+@utility text-gradient-brand {
+  background: linear-gradient(90deg, var(--brand-orange), #ff7a1a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn-primary {
+  background: #ff7a14;
+  border-radius: 6px;
+  color: white;
+  box-shadow: 0 6px 18px -8px rgba(255,122,20,0.55);
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, filter .2s ease;
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(255,122,20,0.65); filter: brightness(1.06); }
+  &:active { transform: translateY(0); }
+}
+
+@utility btn-outline {
+  background: white;
+  border-radius: 6px;
+  color: var(--foreground);
+  border: 1.5px solid #ff7a14;
+  transition: all .25s ease;
+  &:hover { background: color-mix(in oklab, #ff7a14 10%, white); transform: translateY(-2px); box-shadow: 0 10px 26px -14px rgba(255,122,20,0.4); }
+}
+
+@utility card-lift {
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .25s ease;
+  &:hover { transform: translateY(-6px); box-shadow: 0 22px 44px -24px color-mix(in oklab, var(--brand-orange) 40%, transparent); }
+}
+
+@utility story-link {
+  position: relative;
+  display: inline-block;
+  &::after {
+    content: "";
+    position: absolute; left: 0; bottom: -2px;
+    height: 2px; width: 100%;
+    background: var(--brand-orange);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .35s ease;
+  }
+  &:hover::after { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+@keyframes spin-slow { to { transform: rotate(360deg) } }
+@keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+
+@utility animate-floaty { animation: floaty 5s ease-in-out infinite; }
+@utility animate-spin-slow { animation: spin-slow 22s linear infinite; }
+
+@utility bg-grid-soft {
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--brand-orange) 22%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
