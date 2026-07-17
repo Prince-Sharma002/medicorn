@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { navLinks } from "@/data/mocdoc";
 
@@ -18,9 +19,29 @@ export function Navbar() {
                 <ChevronDown className="h-3.5 w-3.5 opacity-70 transition-transform group-hover:rotate-180" />
               </button>
               <div className="pointer-events-none absolute left-0 top-full min-w-44 -translate-y-1 rounded-lg border border-border bg-card p-2 opacity-0 shadow-xl transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                {l.items.map((i) => (
-                  <a key={i} href="#" className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-muted hover:text-foreground">{i}</a>
-                ))}
+                {l.items.map((i) => {
+                  const toPath = (i === "About" || i === "Contact") ? "/about" : undefined;
+                  if (toPath) {
+                    return (
+                      <Link
+                        key={i}
+                        to={toPath}
+                        className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-muted hover:text-foreground"
+                      >
+                        {i}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <a
+                      key={i}
+                      href="#"
+                      className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-muted hover:text-foreground"
+                    >
+                      {i}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           ))}

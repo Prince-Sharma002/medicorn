@@ -1,5 +1,6 @@
 import { Logo } from "./Logo";
 import { Instagram, Linkedin, Twitter, Facebook, Youtube, Phone, Mail, MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const cols = [
   { h: "Products", links: ["MocDoc HMS", "MocDoc LIMS", "MocDoc CMS", "MocDoc DMS", "MocDoc PMS", "MocDoc ART", "MocDoc OptiCare", "EcoLIMS"] },
@@ -45,9 +46,25 @@ export function Footer() {
             <div key={c.h}>
               <h4 className="font-display font-bold" style={{ color: "var(--brand-orange)" }}>{c.h}</h4>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                {c.links.map((l) => (
-                  <li key={l}><a href="#" className="transition-colors hover:text-[var(--brand-orange)]">{l}</a></li>
-                ))}
+                {c.links.map((l) => {
+                  const toPath = (l === "About Us" || l === "Contact Us") ? "/about" : undefined;
+                  if (toPath) {
+                    return (
+                      <li key={l}>
+                        <Link to={toPath} className="transition-colors hover:text-[var(--brand-orange)]">
+                          {l}
+                        </Link>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={l}>
+                      <a href="#" className="transition-colors hover:text-[var(--brand-orange)]">
+                        {l}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
