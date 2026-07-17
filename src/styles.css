@@ -60,9 +60,28 @@
   --brand-orange: #FFA02E;
 }
 
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #c25100; /* As in the screenshot: a deep brand orange/brown */
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a04200;
+}
+
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #c25100 #f1f1f1;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
