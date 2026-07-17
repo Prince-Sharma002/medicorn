@@ -20,7 +20,7 @@ export function Navbar() {
               </button>
               <div className="pointer-events-none absolute left-0 top-full min-w-44 -translate-y-1 rounded-lg border border-border bg-card p-2 opacity-0 shadow-xl transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
                 {l.items.map((i) => {
-                  const toPath = (i === "About" || i === "Contact") ? "/about" : undefined;
+                  const toPath = i === "About" ? "/about" : i === "Contact" ? "/contact" : i === "Careers" ? "/careers" : undefined;
                   if (toPath) {
                     return (
                       <Link

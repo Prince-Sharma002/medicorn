@@ -47,7 +47,7 @@ export function Footer() {
               <h4 className="font-display font-bold" style={{ color: "var(--brand-orange)" }}>{c.h}</h4>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 {c.links.map((l) => {
-                  const toPath = (l === "About Us" || l === "Contact Us") ? "/about" : undefined;
+                  const toPath = l === "About Us" ? "/about" : l === "Contact Us" ? "/contact" : l === "Careers" ? "/careers" : l === "Partner with Us" ? "/partner" : undefined;
                   if (toPath) {
                     return (
                       <li key={l}>
@@ -92,7 +92,7 @@ export function Footer() {
       </div>
 
       {/* Countries strip */}
-      <div className="bg-[#1e2530] text-white">
+      <div className="bg-[#1e2730] text-white">
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
             {countries.map((c, i) => (
@@ -105,7 +105,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-border bg-background py-4 text-center text-xs text-muted-foreground">
+      <div className=" bg-[#1e2930] py-4 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} MocDoc Clone. Built for demonstration purposes.
       </div>
     </footer>
